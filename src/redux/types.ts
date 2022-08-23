@@ -1,4 +1,4 @@
-import { VISIBILITY_FILTERS } from "./actions";
+import { VISIBILITY_FILTERS } from "../constants";
 
 export type VsibilityFilterTypes =
   typeof VISIBILITY_FILTERS[keyof typeof VISIBILITY_FILTERS];
@@ -19,3 +19,5 @@ export type State = {
   visibilityFilter: VsibilityFilterTypes;
   todos: TodoState;
 };
+
+export type ValueOf<T> = T[keyof T];
