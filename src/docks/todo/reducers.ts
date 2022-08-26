@@ -1,15 +1,16 @@
 import { Reducer } from "redux";
-import { TodoAddAction, TodoActionType as Type } from "./actions";
+import { TodoActionType as Type, TodoAction } from "./actions";
 import { TodoListState } from "./types";
 
 export const initialState: TodoListState = { list: [] };
 
-export const todoReducer: Reducer<TodoListState, TodoAddAction> = (
+export const todoReducer: Reducer<TodoListState, TodoAction> = (
   state: TodoListState = initialState,
-  action: TodoAddAction
+  action: TodoAction
 ): TodoListState => {
   switch (action.type) {
     case Type.ADD:
+      if (action.task === undefined) return state;
       return {
         ...state,
         list: [
@@ -21,9 +22,22 @@ export const todoReducer: Reducer<TodoListState, TodoAddAction> = (
           },
         ],
       };
+    case Type.STATUS_TOGGLE:
+      return {
+        ...state,
+        list: state.list
+          .filter((taskItem) => taskItem.id === action.id)
+          .map((taskItem) => {
+            return {
+              id: taskItem.id,
+              task: taskItem.task,
+              completed: !taskItem.completed,
+            };
+          }),
+      };
     default: {
       // eslint-disable-next-line
-      //   const _: never = action.type;
+      const non: never = action.type;
       return state;
     }
   }

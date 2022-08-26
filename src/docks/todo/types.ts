@@ -1,7 +1,7 @@
 export type Task = {
   id: number;
   task: string;
-  completed: false;
+  completed: boolean;
 };
 
 export type TodoListState = {
