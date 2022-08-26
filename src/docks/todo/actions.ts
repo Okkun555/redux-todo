@@ -3,6 +3,7 @@ import { ValueOf } from "../common/types";
 export const TodoActionType = {
   ADD: "todo/add",
   STATUS_TOGGLE: "status/toggle",
+  REMOVE: "todo/remove",
 } as const;
 
 export type TodoAction = {
@@ -18,5 +19,10 @@ export const todoAdd = (task: string): TodoAction => ({
 
 export const toggleStatus = (targetId: number): TodoAction => ({
   type: "status/toggle",
+  id: targetId,
+});
+
+export const todoRemove = (targetId: number): TodoAction => ({
+  type: "todo/remove",
   id: targetId,
 });

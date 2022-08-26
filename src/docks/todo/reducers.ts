@@ -25,15 +25,19 @@ export const todoReducer: Reducer<TodoListState, TodoAction> = (
     case Type.STATUS_TOGGLE:
       return {
         ...state,
-        list: state.list
-          .filter((taskItem) => taskItem.id === action.id)
-          .map((taskItem) => {
-            return {
-              id: taskItem.id,
-              task: taskItem.task,
-              completed: !taskItem.completed,
-            };
-          }),
+        list: state.list.map((taskItem) => {
+          if (action.id !== taskItem.id) return taskItem;
+          return {
+            id: taskItem.id,
+            task: taskItem.task,
+            completed: !taskItem.completed,
+          };
+        }),
+      };
+    case Type.REMOVE:
+      return {
+        ...state,
+        list: state.list.filter((taskItem) => action.id !== taskItem.id),
       };
     default: {
       // eslint-disable-next-line

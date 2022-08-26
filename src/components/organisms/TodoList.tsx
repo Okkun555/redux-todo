@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleStatus } from "../../docks/todo/actions";
+import { todoRemove, toggleStatus } from "../../docks/todo/actions";
 import { Task, TodoListState } from "../../docks/todo/types";
 
 const TodoList: FC = () => {
@@ -13,16 +13,22 @@ const TodoList: FC = () => {
       <ul>
         {todoList.map((task) => {
           return (
-            <div key={task.id}>
+            <li key={task.id}>
               <button
                 type="button"
                 onClick={() => dispatch(toggleStatus(task.id))}
               >
                 変更
               </button>
-              <li>{task.task}</li>
+              <span>{task.task}</span>
               <span>{task.completed ? "完了" : "未完了"}</span>
-            </div>
+              <button
+                type="button"
+                onClick={() => dispatch(todoRemove(task.id))}
+              >
+                削除
+              </button>
+            </li>
           );
         })}
       </ul>
