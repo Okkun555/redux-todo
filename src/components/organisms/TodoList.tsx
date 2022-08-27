@@ -7,7 +7,7 @@ const TodoList: FC = () => {
   const todoList = useSelector<TodoListState, Task[]>((state) => state.list);
   const dispatch = useDispatch();
 
-  return (
+  return todoList.length ? (
     <>
       <ul>
         {todoList.map((task) => {
@@ -32,6 +32,8 @@ const TodoList: FC = () => {
         })}
       </ul>
     </>
+  ) : (
+    <>タスクはありません</>
   );
 };
 
