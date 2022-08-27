@@ -9,7 +9,6 @@ const TodoList: FC = () => {
 
   return (
     <>
-      <h1>Todo一覧</h1>
       <ul>
         {todoList.map((task) => {
           return (
