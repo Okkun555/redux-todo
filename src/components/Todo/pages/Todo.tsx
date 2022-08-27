@@ -1,14 +1,17 @@
 import { FC } from "react";
+import { Card } from "react-bootstrap";
 import AddTask from "../../organisms/AddTask";
 import TodoList from "../../organisms/TodoList";
 
 const Todo: FC = () => {
   return (
     <>
-      <h1>タスク管理</h1>
-      <div className="add-area">
-        <AddTask />
-      </div>
+      <Card style={{ width: "40%" }}>
+        <Card.Body>
+          <Card.Title>タスクの追加</Card.Title>
+          <AddTask />
+        </Card.Body>
+      </Card>
       <div className="list-area">
         <TodoList />
       </div>
